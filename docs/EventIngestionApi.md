@@ -1,6 +1,6 @@
 # TogaiClient::EventIngestionApi
 
-All URIs are relative to *https://sandbox-api.togai.com*
+All URIs are relative to *https://api.togai.com*
 
 | Method | HTTP request | Description |
 | ------ | ------------ | ----------- |
@@ -10,11 +10,11 @@ All URIs are relative to *https://sandbox-api.togai.com*
 
 ## ingest
 
-> ingest(ingest_event_request)
+> <IngestEventResponse> ingest(ingest_event_request)
 
 Ingest events to Togai
 
-API to ingest your application event to Togai for billing and usage analytics. To know the limits on the ingestion api, check our docs - https://togai.com/docs/limits.
+This API let’s you to ingest events to your Togai account. Events ingested using this API will be processed via associated usage meters and further via associated price plans to generate final billable value to invoice the customer Read more about [Event Ingestion](https://docs.togai.com/docs/event-ingestion) 
 
 ### Examples
 
@@ -28,11 +28,12 @@ TogaiClient.configure do |config|
 end
 
 api_instance = TogaiClient::EventIngestionApi.new
-ingest_event_request = TogaiClient::IngestEventRequest.new # IngestEventRequest | Request body to ingest events to Togai usage and billing management service.
+ingest_event_request = TogaiClient::IngestEventRequest.new({event: TogaiClient::Event.new({schema_name: 'schema_name_example', timestamp: Time.now, account_id: '1', attributes: [TogaiClient::Attribute.new({name: 'message', value: '100'})], dimensions: { key: '{"Country":"India"}'}})}) # IngestEventRequest | Request body to ingest events to Togai usage and billing management service.
 
 begin
   # Ingest events to Togai
-  api_instance.ingest(ingest_event_request)
+  result = api_instance.ingest(ingest_event_request)
+  p result
 rescue TogaiClient::ApiError => e
   puts "Error when calling EventIngestionApi->ingest: #{e}"
 end
@@ -40,9 +41,9 @@ end
 
 #### Using the ingest_with_http_info variant
 
-This returns an Array which contains the response data (`nil` in this case), status code and headers.
+This returns an Array which contains the response data, status code and headers.
 
-> <Array(nil, Integer, Hash)> ingest_with_http_info(ingest_event_request)
+> <Array(<IngestEventResponse>, Integer, Hash)> ingest_with_http_info(ingest_event_request)
 
 ```ruby
 begin
@@ -50,7 +51,7 @@ begin
   data, status_code, headers = api_instance.ingest_with_http_info(ingest_event_request)
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => nil
+  p data # => <IngestEventResponse>
 rescue TogaiClient::ApiError => e
   puts "Error when calling EventIngestionApi->ingest_with_http_info: #{e}"
 end
@@ -64,7 +65,7 @@ end
 
 ### Return type
 
-nil (empty response body)
+[**IngestEventResponse**](IngestEventResponse.md)
 
 ### Authorization
 
@@ -78,11 +79,11 @@ nil (empty response body)
 
 ## ingest_batch
 
-> <IngestBatchEventResponse> ingest_batch(ingest_batch_event_request)
+> <IngestEventResponse> ingest_batch(ingest_batch_event_request)
 
 Ingest events to Togai in batch
 
-API to ingest your application event in batch to Togai for billing and usage analytics. To know the limits on the ingestion api, check our docs - https://togai.com/docs/limits.
+This API let’s you to ingest events in batch upto 500 events. Ingest large amounts of events up to 500 in batches in an array using this API.
 
 ### Examples
 
@@ -96,7 +97,7 @@ TogaiClient.configure do |config|
 end
 
 api_instance = TogaiClient::EventIngestionApi.new
-ingest_batch_event_request = TogaiClient::IngestBatchEventRequest.new({events: [TogaiClient::Event.new({event_name: 'event_name_example', id: 'id_example', event_timestamp: Time.now, account_id: 'account_id_example', event_attributes: [TogaiClient::EventAttribute.new({attribute_name: 'apiUsage', attribute_value: 'attribute_value_example'})], dimensions: { key: 'inner_example'}})]}) # IngestBatchEventRequest | Request body to ingest events in batch to Togai usage and billing management service.
+ingest_batch_event_request = TogaiClient::IngestBatchEventRequest.new({events: [TogaiClient::Event.new({schema_name: 'schema_name_example', timestamp: Time.now, account_id: '1', attributes: [TogaiClient::Attribute.new({name: 'message', value: '100'})], dimensions: { key: '{"Country":"India"}'}})]}) # IngestBatchEventRequest | Request body to ingest events in batch to Togai usage and billing management service.
 
 begin
   # Ingest events to Togai in batch
@@ -111,7 +112,7 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<IngestBatchEventResponse>, Integer, Hash)> ingest_batch_with_http_info(ingest_batch_event_request)
+> <Array(<IngestEventResponse>, Integer, Hash)> ingest_batch_with_http_info(ingest_batch_event_request)
 
 ```ruby
 begin
@@ -119,7 +120,7 @@ begin
   data, status_code, headers = api_instance.ingest_batch_with_http_info(ingest_batch_event_request)
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => <IngestBatchEventResponse>
+  p data # => <IngestEventResponse>
 rescue TogaiClient::ApiError => e
   puts "Error when calling EventIngestionApi->ingest_batch_with_http_info: #{e}"
 end
@@ -133,7 +134,7 @@ end
 
 ### Return type
 
-[**IngestBatchEventResponse**](IngestBatchEventResponse.md)
+[**IngestEventResponse**](IngestEventResponse.md)
 
 ### Authorization
 

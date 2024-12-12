@@ -5,7 +5,6 @@
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **_alias** | **String** |  | [optional] |
-| **status** | **String** |  | [optional] |
 
 ## Example
 
@@ -13,8 +12,7 @@
 require 'togai_client'
 
 instance = TogaiClient::AccountAliases.new(
-  _alias: null,
-  status: null
+  _alias: null
 )
 ```
 

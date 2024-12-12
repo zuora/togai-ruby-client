@@ -1,19 +1,19 @@
 # TogaiClient::MetricsApi
 
-All URIs are relative to *https://sandbox-api.togai.com*
+All URIs are relative to *https://api.togai.com*
 
 | Method | HTTP request | Description |
 | ------ | ------------ | ----------- |
-| [**get_metrics**](MetricsApi.md#get_metrics) | **POST** /metrics | Get togai metrics. |
+| [**get_metrics**](MetricsApi.md#get_metrics) | **POST** /metrics | Get Togai Metrics |
 
 
 ## get_metrics
 
 > <GetMetricsResponse> get_metrics(opts)
 
-Get togai metrics.
+Get Togai Metrics
 
-To get the metrics, you make a POST request to the /metrics resource. You can query up to five metrics in a single request. Single response dataset can contain a maximum of 100 data points.
+Togai Metrics API allows you to fetch different metrics from Events, Usage Meters and PricePlans with multiple queryable options. A single request can query up to five metrics.  Single response can contain a maximum of 300 data points. 
 
 ### Examples
 
@@ -28,11 +28,11 @@ end
 
 api_instance = TogaiClient::MetricsApi.new
 opts = {
-  get_metrics_request: TogaiClient::GetMetricsRequest.new({start_time: Time.now, end_time: Time.now, metric_queries: [TogaiClient::MetricQuery.new({id: 'id_example', name: TogaiClient::MetricName::EVENTS, aggregation_period: 'DAY'})]}) # GetMetricsRequest | 
+  get_metrics_request: TogaiClient::GetMetricsRequest.new({start_time: Time.parse('2017-07-21T00:00Z'), end_time: Time.parse('2017-07-21T00:00Z'), metric_queries: [TogaiClient::MetricQuery.new({id: 'id_example', name: TogaiClient::MetricName::EVENTS, aggregation_period: 'HOUR'})]}) # GetMetricsRequest | 
 }
 
 begin
-  # Get togai metrics.
+  # Get Togai Metrics
   result = api_instance.get_metrics(opts)
   p result
 rescue TogaiClient::ApiError => e
@@ -48,7 +48,7 @@ This returns an Array which contains the response data, status code and headers.
 
 ```ruby
 begin
-  # Get togai metrics.
+  # Get Togai Metrics
   data, status_code, headers = api_instance.get_metrics_with_http_info(opts)
   p status_code # => 2xx
   p headers # => { ... }

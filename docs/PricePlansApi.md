@@ -1,23 +1,25 @@
 # TogaiClient::PricePlansApi
 
-All URIs are relative to *https://sandbox-api.togai.com*
+All URIs are relative to *https://api.togai.com*
 
 | Method | HTTP request | Description |
 | ------ | ------------ | ----------- |
-| [**activate_price_plan**](PricePlansApi.md#activate_price_plan) | **POST** /price_plans/{price_plan_name}/activate | Activate a price plan |
-| [**create_price_plan**](PricePlansApi.md#create_price_plan) | **POST** /price_plans | Create a price plan |
-| [**get_price_plan**](PricePlansApi.md#get_price_plan) | **GET** /price_plans/{price_plan_name} | Get a price plan |
-| [**get_price_plans**](PricePlansApi.md#get_price_plans) | **GET** /price_plans | List price plans |
-| [**update_price_plan**](PricePlansApi.md#update_price_plan) | **PATCH** /price_plans/{price_plan_name} | Update a price plan |
+| [**activate_price_plan**](PricePlansApi.md#activate_price_plan) | **POST** /price_plans/{price_plan_id}/activate | (DEPRECATED) Activate a price plan |
+| [**archive_price_plan**](PricePlansApi.md#archive_price_plan) | **DELETE** /price_plans/{price_plan_id} | (DEPRECATED) Archive a price plan |
+| [**create_price_plan**](PricePlansApi.md#create_price_plan) | **POST** /price_plans | (DEPRECATED) Create a price plan |
+| [**get_price_plan**](PricePlansApi.md#get_price_plan) | **GET** /price_plans/{price_plan_id} | (DEPRECATED) Get a price plan |
+| [**get_price_plans**](PricePlansApi.md#get_price_plans) | **GET** /price_plans | (DEPRECATED) List price plans |
+| [**price_plan_migration**](PricePlansApi.md#price_plan_migration) | **POST** /price_plans/migration | (DEPRECATED) Create a price plan migration |
+| [**update_price_plan**](PricePlansApi.md#update_price_plan) | **PATCH** /price_plans/{price_plan_id} | (DEPRECATED) Update a price plan |
 
 
 ## activate_price_plan
 
-> <PricePlan> activate_price_plan(price_plan_name)
+> <PricePlan> activate_price_plan(price_plan_id, activate_price_plan_request)
 
-Activate a price plan
+(DEPRECATED) Activate a price plan
 
-Activate a price plan
+Activate a price plan details using price plan id
 
 ### Examples
 
@@ -31,11 +33,12 @@ TogaiClient.configure do |config|
 end
 
 api_instance = TogaiClient::PricePlansApi.new
-price_plan_name = 'price_plan_name_example' # String | 
+price_plan_id = 'pp.1zYnCiM9Bpg.lv25y' # String | 
+activate_price_plan_request = TogaiClient::ActivatePricePlanRequest.new({currencies: ['currencies_example']}) # ActivatePricePlanRequest | Payload to activate price plan
 
 begin
-  # Activate a price plan
-  result = api_instance.activate_price_plan(price_plan_name)
+  # (DEPRECATED) Activate a price plan
+  result = api_instance.activate_price_plan(price_plan_id, activate_price_plan_request)
   p result
 rescue TogaiClient::ApiError => e
   puts "Error when calling PricePlansApi->activate_price_plan: #{e}"
@@ -46,12 +49,12 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<PricePlan>, Integer, Hash)> activate_price_plan_with_http_info(price_plan_name)
+> <Array(<PricePlan>, Integer, Hash)> activate_price_plan_with_http_info(price_plan_id, activate_price_plan_request)
 
 ```ruby
 begin
-  # Activate a price plan
-  data, status_code, headers = api_instance.activate_price_plan_with_http_info(price_plan_name)
+  # (DEPRECATED) Activate a price plan
+  data, status_code, headers = api_instance.activate_price_plan_with_http_info(price_plan_id, activate_price_plan_request)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <PricePlan>
@@ -64,11 +67,81 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **price_plan_name** | **String** |  |  |
+| **price_plan_id** | **String** |  |  |
+| **activate_price_plan_request** | [**ActivatePricePlanRequest**](ActivatePricePlanRequest.md) | Payload to activate price plan |  |
 
 ### Return type
 
 [**PricePlan**](PricePlan.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+
+## archive_price_plan
+
+> <BaseSuccessResponse> archive_price_plan(price_plan_id)
+
+(DEPRECATED) Archive a price plan
+
+Archive a price plan
+
+### Examples
+
+```ruby
+require 'time'
+require 'togai_client'
+# setup authorization
+TogaiClient.configure do |config|
+  # Configure Bearer authorization (Bearer <credential>): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = TogaiClient::PricePlansApi.new
+price_plan_id = 'pp.1zYnCiM9Bpg.lv25y' # String | 
+
+begin
+  # (DEPRECATED) Archive a price plan
+  result = api_instance.archive_price_plan(price_plan_id)
+  p result
+rescue TogaiClient::ApiError => e
+  puts "Error when calling PricePlansApi->archive_price_plan: #{e}"
+end
+```
+
+#### Using the archive_price_plan_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<BaseSuccessResponse>, Integer, Hash)> archive_price_plan_with_http_info(price_plan_id)
+
+```ruby
+begin
+  # (DEPRECATED) Archive a price plan
+  data, status_code, headers = api_instance.archive_price_plan_with_http_info(price_plan_id)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <BaseSuccessResponse>
+rescue TogaiClient::ApiError => e
+  puts "Error when calling PricePlansApi->archive_price_plan_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **price_plan_id** | **String** |  |  |
+
+### Return type
+
+[**BaseSuccessResponse**](BaseSuccessResponse.md)
 
 ### Authorization
 
@@ -82,11 +155,11 @@ end
 
 ## create_price_plan
 
-> <PricePlan> create_price_plan(create_price_plan_request)
+> <PricePlan> create_price_plan(create_price_plan_request, opts)
 
-Create a price plan
+(DEPRECATED) Create a price plan
 
-Create a price plan
+This API let's you create and price plan Learn more about [Price Plans](https://docs.togai.com/docs/priceplan) 
 
 ### Examples
 
@@ -100,11 +173,14 @@ TogaiClient.configure do |config|
 end
 
 api_instance = TogaiClient::PricePlansApi.new
-create_price_plan_request = TogaiClient::CreatePricePlanRequest.new({name: 'name_example', price_plan_details: TogaiClient::PricePlanDetails.new({pricing_cycle_config: TogaiClient::PricingCycleConfig.new({interval: 'MONTHLY', start_type: 'STATIC', start_offset: TogaiClient::PricingCycleConfigStartOffset.new({day_offset: 'day_offset_example', month_offset: 'month_offset_example'}), grace_period: 3}), rate_cards: [TogaiClient::RateCard.new({display_name: 'display_name_example', pricing_model: TogaiClient::PricingModel::TIERED, rate_config: TogaiClient::RateConfigUsage.new({usage_meter_name: 'usage_meter_name_example', slabs: [TogaiClient::SlabUsage.new({rate: 3.56, start_after: 3.56, price_type: TogaiClient::PriceType::FLAT, order: 37})]})})]})}) # CreatePricePlanRequest | Payload to create price plan
+create_price_plan_request = TogaiClient::CreatePricePlanRequest.new({name: 'name_example', price_plan_details: TogaiClient::CreatePricePlanDetails.new({supported_currencies: ['supported_currencies_example']})}) # CreatePricePlanRequest | Payload to create price plan
+opts = {
+  dry_run: false # Boolean | 
+}
 
 begin
-  # Create a price plan
-  result = api_instance.create_price_plan(create_price_plan_request)
+  # (DEPRECATED) Create a price plan
+  result = api_instance.create_price_plan(create_price_plan_request, opts)
   p result
 rescue TogaiClient::ApiError => e
   puts "Error when calling PricePlansApi->create_price_plan: #{e}"
@@ -115,12 +191,12 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<PricePlan>, Integer, Hash)> create_price_plan_with_http_info(create_price_plan_request)
+> <Array(<PricePlan>, Integer, Hash)> create_price_plan_with_http_info(create_price_plan_request, opts)
 
 ```ruby
 begin
-  # Create a price plan
-  data, status_code, headers = api_instance.create_price_plan_with_http_info(create_price_plan_request)
+  # (DEPRECATED) Create a price plan
+  data, status_code, headers = api_instance.create_price_plan_with_http_info(create_price_plan_request, opts)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <PricePlan>
@@ -134,6 +210,7 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **create_price_plan_request** | [**CreatePricePlanRequest**](CreatePricePlanRequest.md) | Payload to create price plan |  |
+| **dry_run** | **Boolean** |  | [optional] |
 
 ### Return type
 
@@ -151,11 +228,11 @@ end
 
 ## get_price_plan
 
-> <PricePlan> get_price_plan(price_plan_name)
+> <PricePlan> get_price_plan(price_plan_id, opts)
 
-Get a price plan
+(DEPRECATED) Get a price plan
 
-Get a price plan
+Get a price plan details using price plan id
 
 ### Examples
 
@@ -169,11 +246,14 @@ TogaiClient.configure do |config|
 end
 
 api_instance = TogaiClient::PricePlansApi.new
-price_plan_name = 'price_plan_name_example' # String | 
+price_plan_id = 'pp.1zYnCiM9Bpg.lv25y' # String | 
+opts = {
+  version: 2 # Integer | Optional version to get a specific version. Gets latest version if it is not provided.
+}
 
 begin
-  # Get a price plan
-  result = api_instance.get_price_plan(price_plan_name)
+  # (DEPRECATED) Get a price plan
+  result = api_instance.get_price_plan(price_plan_id, opts)
   p result
 rescue TogaiClient::ApiError => e
   puts "Error when calling PricePlansApi->get_price_plan: #{e}"
@@ -184,12 +264,12 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<PricePlan>, Integer, Hash)> get_price_plan_with_http_info(price_plan_name)
+> <Array(<PricePlan>, Integer, Hash)> get_price_plan_with_http_info(price_plan_id, opts)
 
 ```ruby
 begin
-  # Get a price plan
-  data, status_code, headers = api_instance.get_price_plan_with_http_info(price_plan_name)
+  # (DEPRECATED) Get a price plan
+  data, status_code, headers = api_instance.get_price_plan_with_http_info(price_plan_id, opts)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <PricePlan>
@@ -202,7 +282,8 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **price_plan_name** | **String** |  |  |
+| **price_plan_id** | **String** |  |  |
+| **version** | **Integer** | Optional version to get a specific version. Gets latest version if it is not provided. | [optional] |
 
 ### Return type
 
@@ -222,9 +303,9 @@ end
 
 > <PricePlanPaginatedResponse> get_price_plans(opts)
 
-List price plans
+(DEPRECATED) List price plans
 
-List price plans with pagination and sort
+Get a list of price plans
 
 ### Examples
 
@@ -239,12 +320,12 @@ end
 
 api_instance = TogaiClient::PricePlansApi.new
 opts = {
-  next_token: 'eyJsYXN0SXRlbUlkIjogInN0cmluZyIsICJwYWdlU2l6ZSI6IDEyMywgInNvcnRPcmRlciI6ICJhc2MifQ==', # String | 
-  page_size: '10' # String | 
+  next_token: 'eyJsYXN0SXRlbUlkIjogInN0cmluZyIsICJwYWdlU2l6ZSI6IDEwMCwgInNvcnRPcmRlciI6ICJhc2MifQ==', # String | 
+  page_size: 10 # Float | 
 }
 
 begin
-  # List price plans
+  # (DEPRECATED) List price plans
   result = api_instance.get_price_plans(opts)
   p result
 rescue TogaiClient::ApiError => e
@@ -260,7 +341,7 @@ This returns an Array which contains the response data, status code and headers.
 
 ```ruby
 begin
-  # List price plans
+  # (DEPRECATED) List price plans
   data, status_code, headers = api_instance.get_price_plans_with_http_info(opts)
   p status_code # => 2xx
   p headers # => { ... }
@@ -275,7 +356,7 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **next_token** | **String** |  | [optional] |
-| **page_size** | **String** |  | [optional] |
+| **page_size** | **Float** |  | [optional] |
 
 ### Return type
 
@@ -291,13 +372,13 @@ end
 - **Accept**: application/json
 
 
-## update_price_plan
+## price_plan_migration
 
-> <PricePlan> update_price_plan(price_plan_name, update_price_plan_request)
+> <BaseSuccessResponse> price_plan_migration(create_price_plan_migration_request)
 
-Update a price plan
+(DEPRECATED) Create a price plan migration
 
-Update a price plan
+Migrates accounts across price plans. This is an asynchronous process functioning on top of Togai's Jobs  framework. Status of the created migrations can be obtained using the [Jobs APIs](https://docs.togai.com/api-reference/jobs/get-the-status-of-a-job) 
 
 ### Examples
 
@@ -311,12 +392,81 @@ TogaiClient.configure do |config|
 end
 
 api_instance = TogaiClient::PricePlansApi.new
-price_plan_name = 'price_plan_name_example' # String | 
+create_price_plan_migration_request = TogaiClient::CreatePricePlanMigrationRequest.new({source_id: 'source_id_example', source_version: 37, migration_mode: 'IMMEDIATE'}) # CreatePricePlanMigrationRequest | Payload to create price plan migration request
+
+begin
+  # (DEPRECATED) Create a price plan migration
+  result = api_instance.price_plan_migration(create_price_plan_migration_request)
+  p result
+rescue TogaiClient::ApiError => e
+  puts "Error when calling PricePlansApi->price_plan_migration: #{e}"
+end
+```
+
+#### Using the price_plan_migration_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<BaseSuccessResponse>, Integer, Hash)> price_plan_migration_with_http_info(create_price_plan_migration_request)
+
+```ruby
+begin
+  # (DEPRECATED) Create a price plan migration
+  data, status_code, headers = api_instance.price_plan_migration_with_http_info(create_price_plan_migration_request)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <BaseSuccessResponse>
+rescue TogaiClient::ApiError => e
+  puts "Error when calling PricePlansApi->price_plan_migration_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **create_price_plan_migration_request** | [**CreatePricePlanMigrationRequest**](CreatePricePlanMigrationRequest.md) | Payload to create price plan migration request |  |
+
+### Return type
+
+[**BaseSuccessResponse**](BaseSuccessResponse.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+
+## update_price_plan
+
+> <PricePlan> update_price_plan(price_plan_id, update_price_plan_request)
+
+(DEPRECATED) Update a price plan
+
+Update an existing price plan Price Plans with status as DRAFT alone can be updated . Learn more about [Price plans](https://docs.togai.com/docs/priceplan) from our Guides 
+
+### Examples
+
+```ruby
+require 'time'
+require 'togai_client'
+# setup authorization
+TogaiClient.configure do |config|
+  # Configure Bearer authorization (Bearer <credential>): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = TogaiClient::PricePlansApi.new
+price_plan_id = 'pp.1zYnCiM9Bpg.lv25y' # String | 
 update_price_plan_request = TogaiClient::UpdatePricePlanRequest.new # UpdatePricePlanRequest | Payload to update price plan
 
 begin
-  # Update a price plan
-  result = api_instance.update_price_plan(price_plan_name, update_price_plan_request)
+  # (DEPRECATED) Update a price plan
+  result = api_instance.update_price_plan(price_plan_id, update_price_plan_request)
   p result
 rescue TogaiClient::ApiError => e
   puts "Error when calling PricePlansApi->update_price_plan: #{e}"
@@ -327,12 +477,12 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<PricePlan>, Integer, Hash)> update_price_plan_with_http_info(price_plan_name, update_price_plan_request)
+> <Array(<PricePlan>, Integer, Hash)> update_price_plan_with_http_info(price_plan_id, update_price_plan_request)
 
 ```ruby
 begin
-  # Update a price plan
-  data, status_code, headers = api_instance.update_price_plan_with_http_info(price_plan_name, update_price_plan_request)
+  # (DEPRECATED) Update a price plan
+  data, status_code, headers = api_instance.update_price_plan_with_http_info(price_plan_id, update_price_plan_request)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <PricePlan>
@@ -345,7 +495,7 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **price_plan_name** | **String** |  |  |
+| **price_plan_id** | **String** |  |  |
 | **update_price_plan_request** | [**UpdatePricePlanRequest**](UpdatePricePlanRequest.md) | Payload to update price plan |  |
 
 ### Return type

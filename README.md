@@ -46,13 +46,12 @@ TogaiClient.configure do |config|
 end
 
 api_instance = TogaiClient::AccountsApi.new
-customer_id = 'customer_id_example' # String | 
-account_id = 'account_id_example' # String | 
+account_id = 'ACC00001' # String | account_id corresponding to an account
 add_account_aliases_request = TogaiClient::AddAccountAliasesRequest.new # AddAccountAliasesRequest | Payload to add aliases to account
 
 begin
   #Add Aliases to account
-  result = api_instance.add_aliases(customer_id, account_id, add_account_aliases_request)
+  result = api_instance.add_aliases(account_id, add_account_aliases_request)
   p result
 rescue TogaiClient::ApiError => e
   puts "Exception when calling AccountsApi->add_aliases: #{e}"
