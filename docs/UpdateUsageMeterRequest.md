@@ -4,10 +4,14 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **description** | **String** | Description of the event | [optional] |
-| **type** | **String** | Type of usage meter * COUNTER - Count usage  * GAUGE - Not supported at the moment * TIMER - Not supported at the moment  |  |
-| **aggregation** | **String** | Aggregation to be applied on usage meter result * COUNT - Counts number of events matching the usage meter * SUM - Sums up results of computation of all events matching usage meter  |  |
+| **name** | **String** | Name of usage meter. | [optional] |
+| **billable_name** | **String** | Billable name of usage meter. Billable name takes precedence over name to display in invoice. | [optional] |
+| **description** | **String** | Description of the usage meter | [optional] |
+| **event_schema_name** | **String** | Event Schema Identifier | [optional] |
+| **type** | **String** | Type of usage meter * COUNTER - Count usage  | [optional] |
+| **aggregation** | [**UsageMeterAggregation**](UsageMeterAggregation.md) |  | [optional] |
 | **computations** | [**Array&lt;Computation&gt;**](Computation.md) |  | [optional] |
+| **filters** | [**Array&lt;UsageMeterFilterEntry&gt;**](UsageMeterFilterEntry.md) |  | [optional] |
 
 ## Example
 
@@ -15,10 +19,14 @@
 require 'togai_client'
 
 instance = TogaiClient::UpdateUsageMeterRequest.new(
+  name: null,
+  billable_name: null,
   description: null,
+  event_schema_name: null,
   type: COUNTER,
-  aggregation: COUNT,
-  computations: null
+  aggregation: null,
+  computations: null,
+  filters: null
 )
 ```
 

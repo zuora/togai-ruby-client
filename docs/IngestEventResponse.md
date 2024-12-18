@@ -4,7 +4,12 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **ingestion_request_id** | **String** | On successful ingestion acceptance request, ingestion request id will be returned. This ingestion id can be used by clients to query the status of ingestion (IN_PROGRESS, COMPLETED). |  |
+| **success** | **Boolean** |  | [optional] |
+| **status_code** | **Integer** |  | [optional] |
+| **name** | **String** |  | [optional] |
+| **message** | **String** |  | [optional] |
+| **code** | **String** |  | [optional] |
+| **details** | **Object** |  | [optional] |
 
 ## Example
 
@@ -12,7 +17,12 @@
 require 'togai_client'
 
 instance = TogaiClient::IngestEventResponse.new(
-  ingestion_request_id: null
+  success: true,
+  status_code: null,
+  name: null,
+  message: null,
+  code: null,
+  details: null
 )
 ```
 

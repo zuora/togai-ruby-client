@@ -1,6 +1,6 @@
 # TogaiClient::EventSchemasApi
 
-All URIs are relative to *https://sandbox-api.togai.com*
+All URIs are relative to *https://api.togai.com*
 
 | Method | HTTP request | Description |
 | ------ | ------------ | ----------- |
@@ -8,10 +8,10 @@ All URIs are relative to *https://sandbox-api.togai.com*
 | [**create_event_schema**](EventSchemasApi.md#create_event_schema) | **POST** /event_schema | Create an event schema |
 | [**deactivate_event_schema**](EventSchemasApi.md#deactivate_event_schema) | **POST** /event_schema/{event_schema_name}/deactivate | Deactivate an event schema |
 | [**delete_event_schema**](EventSchemasApi.md#delete_event_schema) | **DELETE** /event_schema/{event_schema_name} | Delete an event schema |
+| [**event_schema_event_schema_name_patch**](EventSchemasApi.md#event_schema_event_schema_name_patch) | **PATCH** /event_schema/{event_schema_name} | Update an event schema |
 | [**get_event_schema**](EventSchemasApi.md#get_event_schema) | **GET** /event_schema/{event_schema_name} | Get an event schema |
 | [**list_event_schema_versions**](EventSchemasApi.md#list_event_schema_versions) | **GET** /event_schema/{event_schema_name}/versions | List all event schema versions |
 | [**list_event_schemas**](EventSchemasApi.md#list_event_schemas) | **GET** /event_schema | List event schemas |
-| [**update_event_schema**](EventSchemasApi.md#update_event_schema) | **PATCH** /event_schema/{event_schema_name} | Update an event schema |
 
 
 ## activate_event_schema
@@ -34,7 +34,7 @@ TogaiClient.configure do |config|
 end
 
 api_instance = TogaiClient::EventSchemasApi.new
-event_schema_name = 'event_schema_name_example' # String | 
+event_schema_name = 'rides' # String | 
 
 begin
   # Activate an event schema
@@ -89,7 +89,7 @@ end
 
 Create an event schema
 
-Create an event schema
+Create an event schema with attributes and dimensions to process events.
 
 ### Examples
 
@@ -158,7 +158,7 @@ end
 
 Deactivate an event schema
 
-Deactivate an event schema
+You can deactivate an event schema using this API. In case you have an activate usage meter associated with the event schema, you will need to deactivate it first and then try deactivating the event schema. 
 
 ### Examples
 
@@ -172,7 +172,7 @@ TogaiClient.configure do |config|
 end
 
 api_instance = TogaiClient::EventSchemasApi.new
-event_schema_name = 'event_schema_name_example' # String | 
+event_schema_name = 'rides' # String | 
 
 begin
   # Deactivate an event schema
@@ -227,7 +227,7 @@ end
 
 Delete an event schema
 
-Delete an event schema
+To delete(archive) an event schema, you’re required to archive associated active usage meters if any.
 
 ### Examples
 
@@ -241,7 +241,7 @@ TogaiClient.configure do |config|
 end
 
 api_instance = TogaiClient::EventSchemasApi.new
-event_schema_name = 'event_schema_name_example' # String | 
+event_schema_name = 'rides' # String | 
 
 begin
   # Delete an event schema
@@ -290,6 +290,77 @@ end
 - **Accept**: application/json
 
 
+## event_schema_event_schema_name_patch
+
+> <EventSchema> event_schema_event_schema_name_patch(event_schema_name, update_event_schema_request)
+
+Update an event schema
+
+Update an event schema and add new attributes and dimensions  Once an event schema is activated, you cannot update or delete existing attributes and dimensions however you can add new attributes and dimensions and update event schema description.     operationId: updateEventSchema 
+
+### Examples
+
+```ruby
+require 'time'
+require 'togai_client'
+# setup authorization
+TogaiClient.configure do |config|
+  # Configure Bearer authorization (Bearer <credential>): bearerAuth
+  config.access_token = 'YOUR_BEARER_TOKEN'
+end
+
+api_instance = TogaiClient::EventSchemasApi.new
+event_schema_name = 'rides' # String | 
+update_event_schema_request = TogaiClient::UpdateEventSchemaRequest.new # UpdateEventSchemaRequest | Payload to update event schema
+
+begin
+  # Update an event schema
+  result = api_instance.event_schema_event_schema_name_patch(event_schema_name, update_event_schema_request)
+  p result
+rescue TogaiClient::ApiError => e
+  puts "Error when calling EventSchemasApi->event_schema_event_schema_name_patch: #{e}"
+end
+```
+
+#### Using the event_schema_event_schema_name_patch_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<EventSchema>, Integer, Hash)> event_schema_event_schema_name_patch_with_http_info(event_schema_name, update_event_schema_request)
+
+```ruby
+begin
+  # Update an event schema
+  data, status_code, headers = api_instance.event_schema_event_schema_name_patch_with_http_info(event_schema_name, update_event_schema_request)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <EventSchema>
+rescue TogaiClient::ApiError => e
+  puts "Error when calling EventSchemasApi->event_schema_event_schema_name_patch_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **event_schema_name** | **String** |  |  |
+| **update_event_schema_request** | [**UpdateEventSchemaRequest**](UpdateEventSchemaRequest.md) | Payload to update event schema |  |
+
+### Return type
+
+[**EventSchema**](EventSchema.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+
 ## get_event_schema
 
 > <EventSchema> get_event_schema(event_schema_name, opts)
@@ -310,9 +381,9 @@ TogaiClient.configure do |config|
 end
 
 api_instance = TogaiClient::EventSchemasApi.new
-event_schema_name = 'event_schema_name_example' # String | 
+event_schema_name = 'rides' # String | 
 opts = {
-  version: 56 # Integer | Optional version to get a specific version. Gets latest version if it is not provided.
+  version: 2 # Integer | Optional version to get a specific version. Gets latest version if it is not provided.
 }
 
 begin
@@ -369,7 +440,7 @@ end
 
 List all event schema versions
 
-List all event schema versions
+Get a list of all the versions of an event schema
 
 ### Examples
 
@@ -383,7 +454,7 @@ TogaiClient.configure do |config|
 end
 
 api_instance = TogaiClient::EventSchemasApi.new
-event_schema_name = 'event_schema_name_example' # String | 
+event_schema_name = 'rides' # String | 
 
 begin
   # List all event schema versions
@@ -438,7 +509,7 @@ end
 
 List event schemas
 
-List event schemas with pagination and sort
+Returns a list of event schema with pagination.
 
 ### Examples
 
@@ -453,10 +524,9 @@ end
 
 api_instance = TogaiClient::EventSchemasApi.new
 opts = {
-  statuses: 'statuses_example', # String | Filter by provided statuses
-  next_token: 'eyJsYXN0SXRlbUlkIjogInN0cmluZyIsICJwYWdlU2l6ZSI6IDEyMywgInNvcnRPcmRlciI6ICJhc2MifQ==', # String | 
-  page_size: '10', # String | 
-  sort_order: 'ASC' # String | 
+  status: 'ACTIVE', # String | Filter by provided status
+  next_token: 'eyJsYXN0SXRlbUlkIjogInN0cmluZyIsICJwYWdlU2l6ZSI6IDEwMCwgInNvcnRPcmRlciI6ICJhc2MifQ==', # String | 
+  page_size: 10 # Float | 
 }
 
 begin
@@ -490,10 +560,9 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **statuses** | **String** | Filter by provided statuses | [optional] |
+| **status** | **String** | Filter by provided status | [optional] |
 | **next_token** | **String** |  | [optional] |
-| **page_size** | **String** |  | [optional] |
-| **sort_order** | **String** |  | [optional] |
+| **page_size** | **Float** |  | [optional] |
 
 ### Return type
 
@@ -506,76 +575,5 @@ end
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: application/json
-
-
-## update_event_schema
-
-> <EventSchema> update_event_schema(event_schema_name, update_event_schema_request)
-
-Update an event schema
-
-Update an event schema
-
-### Examples
-
-```ruby
-require 'time'
-require 'togai_client'
-# setup authorization
-TogaiClient.configure do |config|
-  # Configure Bearer authorization (Bearer <credential>): bearerAuth
-  config.access_token = 'YOUR_BEARER_TOKEN'
-end
-
-api_instance = TogaiClient::EventSchemasApi.new
-event_schema_name = 'event_schema_name_example' # String | 
-update_event_schema_request = TogaiClient::UpdateEventSchemaRequest.new({attributes: [TogaiClient::EventAttributeSchema.new({name: 'distance'})], dimensions: [TogaiClient::DimensionsSchema.new({name: 'city'})]}) # UpdateEventSchemaRequest | Payload to update event schema
-
-begin
-  # Update an event schema
-  result = api_instance.update_event_schema(event_schema_name, update_event_schema_request)
-  p result
-rescue TogaiClient::ApiError => e
-  puts "Error when calling EventSchemasApi->update_event_schema: #{e}"
-end
-```
-
-#### Using the update_event_schema_with_http_info variant
-
-This returns an Array which contains the response data, status code and headers.
-
-> <Array(<EventSchema>, Integer, Hash)> update_event_schema_with_http_info(event_schema_name, update_event_schema_request)
-
-```ruby
-begin
-  # Update an event schema
-  data, status_code, headers = api_instance.update_event_schema_with_http_info(event_schema_name, update_event_schema_request)
-  p status_code # => 2xx
-  p headers # => { ... }
-  p data # => <EventSchema>
-rescue TogaiClient::ApiError => e
-  puts "Error when calling EventSchemasApi->update_event_schema_with_http_info: #{e}"
-end
-```
-
-### Parameters
-
-| Name | Type | Description | Notes |
-| ---- | ---- | ----------- | ----- |
-| **event_schema_name** | **String** |  |  |
-| **update_event_schema_request** | [**UpdateEventSchemaRequest**](UpdateEventSchemaRequest.md) | Payload to update event schema |  |
-
-### Return type
-
-[**EventSchema**](EventSchema.md)
-
-### Authorization
-
-[bearerAuth](../README.md#bearerAuth)
-
-### HTTP request headers
-
-- **Content-Type**: application/json
 - **Accept**: application/json
 

@@ -5,10 +5,11 @@
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **id** | **String** | Customer identifier |  |
-| **name** | **String** | Name of the customer |  |
+| **name** | **String** | Name of the Customer |  |
 | **primary_email** | **String** | Primary email of the customer |  |
-| **billing_address** | **String** | billing address of the customer |  |
-| **account** | [**CreateAccountRequest**](CreateAccountRequest.md) |  | [optional] |
+| **address** | [**Address**](Address.md) |  |  |
+| **settings** | [**Array&lt;CreateEntitySetting&gt;**](CreateEntitySetting.md) |  | [optional] |
+| **account** | [**CreateAccountRequestWithoutCustomerId**](CreateAccountRequestWithoutCustomerId.md) |  | [optional] |
 
 ## Example
 
@@ -16,10 +17,11 @@
 require 'togai_client'
 
 instance = TogaiClient::CreateCustomerRequest.new(
-  id: null,
-  name: null,
-  primary_email: null,
-  billing_address: null,
+  id: 01BX5ZZKBKACTAV9WEVGEMMVRZ,
+  name: ACME Enterprise,
+  primary_email: admin@example.com,
+  address: null,
+  settings: null,
   account: null
 )
 ```

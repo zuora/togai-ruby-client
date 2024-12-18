@@ -13,7 +13,7 @@
 require 'togai_client'
 
 instance = TogaiClient::MetricQueryFilterEntry.new(
-  field_name: null,
+  field_name: ACCOUNT_ID,
   field_values: null
 )
 ```

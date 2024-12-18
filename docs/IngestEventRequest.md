@@ -4,7 +4,7 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **event** | [**Event**](Event.md) |  | [optional] |
+| **event** | [**Event**](Event.md) |  |  |
 
 ## Example
 

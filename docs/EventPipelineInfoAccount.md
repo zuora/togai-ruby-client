@@ -6,6 +6,7 @@
 | ---- | ---- | ----------- | ----- |
 | **id** | **String** |  |  |
 | **name** | **String** |  |  |
+| **_alias** | **String** |  | [optional] |
 
 ## Example
 
@@ -14,7 +15,8 @@ require 'togai_client'
 
 instance = TogaiClient::EventPipelineInfoAccount.new(
   id: null,
-  name: null
+  name: null,
+  _alias: null
 )
 ```
 

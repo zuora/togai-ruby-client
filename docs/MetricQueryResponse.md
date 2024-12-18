@@ -5,7 +5,7 @@
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **id** | **String** |  |  |
-| **name** | [**MetricName**](MetricName.md) |  |  |
+| **name** | [**MetricName**](MetricName.md) |  | [default to &#39;EVENTS&#39;] |
 | **data** | [**Array&lt;MetricDataPoints&gt;**](MetricDataPoints.md) |  |  |
 
 ## Example
