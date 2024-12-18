@@ -8,7 +8,7 @@ This is an official Ruby client library for using [Togai APIs](https://docs.toga
 
 
 - API version: 1.0
-- Package version: 1.0.1
+- Package version: 1.0.2
 
 ## Installation
 

@@ -5,7 +5,7 @@
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **action_type** | **String** | Operation type |  |
-| **rate_card_name** | **String** | Required for UPDATE and DELETE operations |  |
+| **rate_card_name** | **String** | Name of rate card |  |
 | **rate_card** | [**RateCardData**](RateCardData.md) |  | [optional] |
 
 ## Example

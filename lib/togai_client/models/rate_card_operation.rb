@@ -19,7 +19,7 @@ module TogaiClient
     # Operation type
     attr_accessor :action_type
 
-    # Required for UPDATE and DELETE operations
+    # Name of rate card
     attr_accessor :rate_card_name
 
     attr_accessor :rate_card
@@ -132,7 +132,7 @@ module TogaiClient
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
       return false if @action_type.nil?
-      action_type_validator = EnumAttributeValidator.new('String', ["CREATE", "UPDATE", "DELETE"])
+      action_type_validator = EnumAttributeValidator.new('String', ["CREATE", "UPDATE", "DELETE", "UPSERT"])
       return false unless action_type_validator.valid?(@action_type)
       return false if @rate_card_name.nil?
       return false if @rate_card_name.to_s.length > 50
@@ -142,7 +142,7 @@ module TogaiClient
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] action_type Object to be assigned
     def action_type=(action_type)
-      validator = EnumAttributeValidator.new('String', ["CREATE", "UPDATE", "DELETE"])
+      validator = EnumAttributeValidator.new('String', ["CREATE", "UPDATE", "DELETE", "UPSERT"])
       unless validator.valid?(action_type)
         fail ArgumentError, "invalid value for \"action_type\", must be one of #{validator.allowable_values}."
       end
